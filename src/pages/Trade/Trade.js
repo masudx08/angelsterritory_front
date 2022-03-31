@@ -1,19 +1,21 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { MyContext } from '../../MainContext'
-import { getCarts } from '../../utils/services'
+import { getCarts, upPool, downPool } from '../../utils/services'
 
 
 export default function Trade() {
   const {carts, setCarts} = useContext(MyContext)
   
   useEffect(()=>{
-    getCarts()
-    .then(res=>{
-     setCarts(res)
-    })
+    getCarts().then(res=>{setCarts(res)})
   },[])
   
-  console.log(carts,'carts')
+  const upPoolHandler = (id, data) => {
+    upPool(id, data)
+  }
+  const downPoolHandler = (id, data) => {
+    downPool(id, data)
+  }
   
   return (
     <div>
@@ -21,7 +23,9 @@ export default function Trade() {
         carts.map((cart, i) => {
           return (
             <div key={i}>
-              {cart._id}
+              <p>{cart.currency}, pool: {cart.totalPool}</p>
+              <input type="text" placeholder='upPool' onKeyUp={(event)=>event.code === 'Enter' && upPoolHandler(cart._id, event.target.value)} />
+              <input type="text" placeholder='downPool' onKeyUp={(event)=>event.code === 'Enter' && downPoolHandler(cart._id, event.target.value)} />
             </div>
           )
         })
