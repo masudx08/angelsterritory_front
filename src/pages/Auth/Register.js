@@ -5,7 +5,7 @@ import { registation } from '../../utils/services'
 export default function Register() {
   const {register, handleSubmit} = useForm()
   const handleRegister = data => {
-   registation(data).then(res=>console.log(res.result))
+   registation(data).then(res=>console.log(res))
   }
   return (
     <div>

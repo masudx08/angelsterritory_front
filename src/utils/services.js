@@ -47,6 +47,11 @@ const login = data =>  {
   })
 }
 const registation = data =>  {
+  if(data.password !== data.confirmPassword){
+    return new Promise((resolve, reject)=>{
+      resolve({message:'password & confirm password are not  same'})
+    })
+  }
   return FetchHandler({
     url : 'user/register',
     method:'POST',

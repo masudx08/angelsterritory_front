@@ -6,6 +6,7 @@ import MainContext from './MainContext';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Profile from './pages/Profile/Profile';
 function App() {
   return (
     <MainContext>
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Trade />} />
         </Routes>
       </BrowserRouter>

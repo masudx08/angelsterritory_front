@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import { login } from '../../utils/services';
 export default function Login() {
   const { register, handleSubmit } = useForm()
+
   const handleLogin = data => {
     login(data)
     .then(res=>{
-      console.log(res.message)
+      const now = new Date()
+      now.setTime(now.getTime()+60*1000)
+      document.cookie = `token=${res.jwtAccessToken}; expires=${now.toUTCString()}`
     })
   }
   return (
