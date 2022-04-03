@@ -1,3 +1,4 @@
+const { cookieParser } = require("./functions")
 
 const backendUrl = 'http://localhost:5555/'
 
@@ -6,7 +7,8 @@ const FetchHandler = (prop) => {
     return fetch(backendUrl+prop.url, {
       method: 'POST',
       headers: {
-        'Content-Type' : 'application/json'
+        'Content-Type' : 'application/json',
+        token: cookieParser('token')
       },
       body : prop.data
     })

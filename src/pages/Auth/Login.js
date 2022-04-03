@@ -8,8 +8,9 @@ export default function Login() {
   const handleLogin = data => {
     login(data)
     .then(res=>{
+      console.log(res)
       const now = new Date()
-      now.setTime(now.getTime()+60*1000)
+      now.setTime(now.getTime()+3600*1000)
       document.cookie = `token=${res.jwtAccessToken}; expires=${now.toUTCString()}`
     })
   }

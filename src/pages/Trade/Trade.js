@@ -23,7 +23,7 @@ export default function Trade() {
         carts.map((cart, i) => {
           return (
             <div key={i}>
-              <p>{cart.currency}, pool: {cart.totalPool}</p>
+              <p>{cart.currency}, pool: {cart.totalPool}, id {cart._id}</p>
               <input type="text" placeholder='upPool' onKeyUp={(event)=>event.code === 'Enter' && upPoolHandler(cart._id, event.target.value)} />
               <input type="text" placeholder='downPool' onKeyUp={(event)=>event.code === 'Enter' && downPoolHandler(cart._id, event.target.value)} />
             </div>
