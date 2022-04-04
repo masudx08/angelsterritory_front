@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
-import { login } from '../../utils/services';
+import { loginFetch } from '../../utils/services';
 export default function Login() {
   const { register, handleSubmit } = useForm()
 
   const handleLogin = data => {
-    login(data)
+    loginFetch(data)
     .then(res=>{
       console.log(res)
       const now = new Date()

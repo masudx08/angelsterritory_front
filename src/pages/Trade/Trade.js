@@ -1,20 +1,20 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { MyContext } from '../../MainContext'
-import { getCarts, upPool, downPool } from '../../utils/services'
+import { getCartsFetch, upPoolFetch, downPoolFetch } from '../../utils/services'
 
 
 export default function Trade() {
   const {carts, setCarts} = useContext(MyContext)
   
   useEffect(()=>{
-    getCarts().then(res=>{setCarts(res)})
+    getCartsFetch().then(res=>{setCarts(res)})
   },[])
   
   const upPoolHandler = (id, data) => {
-    upPool(id, data)
+    upPoolFetch(id, data)
   }
   const downPoolHandler = (id, data) => {
-    downPool(id, data)
+    downPoolFetch(id, data)
   }
   
   return (

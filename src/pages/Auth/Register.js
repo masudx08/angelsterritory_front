@@ -1,11 +1,11 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { registation } from '../../utils/services'
+import { registationFetch } from '../../utils/services'
 export default function Register() {
   const {register, handleSubmit} = useForm()
   const handleRegister = data => {
-   registation(data).then(res=>console.log(res))
+   registationFetch(data).then(res=>console.log(res))
   }
   return (
     <div>

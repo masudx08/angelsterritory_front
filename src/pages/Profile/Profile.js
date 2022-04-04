@@ -1,20 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { cookieParser } from '../../utils/functions'
+import { profileFetch } from '../../utils/services'
 
 export default function Profile() {
-
+const [user, setUser]  = useState({})
   useEffect(()=>{
-    fetch('http://localhost:5555/user', {
-      method : 'GET',
-      headers: {
-        token : cookieParser('token')
-      }
-    }).then(res=>res.json())
+    profileFetch()
     .then(res=>{
-      console.log(res)
+     setUser(res)
     })
   },[])
   return (
-    <div>Profile</div>
+    <div>
+      email: {user?.email} <br />
+      role: {user?.role}
+    </div>
   )
 }

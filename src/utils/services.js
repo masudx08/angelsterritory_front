@@ -17,15 +17,25 @@ const FetchHandler = (prop) => {
     })
   }
 
+  if(prop.method == 'GET'){
+    return fetch(backendUrl+prop.url, {
+      headers: {
+        token: cookieParser('token')
+      }
+    }).then(res=>{
+      return res.json()
+    })
+  }
 }
 
-const getCarts = () => {
-  return fetch(backendUrl+'cart').then(res=>{
-    return res.json()
+const getCartsFetch = () => {
+  return FetchHandler({
+    url: 'cart',
+    method: 'GET'
   })
 }
 
-const upPool = (id, data) => {
+const upPoolFetch = (id, data) => {
   return FetchHandler({
     url:'cart/'+id,
     method: 'POST',
@@ -33,7 +43,7 @@ const upPool = (id, data) => {
   })
 }
 
-const downPool = (id, data) => {
+const downPoolFetch = (id, data) => {
   return FetchHandler({
     url:'cart/'+id,
     method: 'POST',
@@ -41,14 +51,14 @@ const downPool = (id, data) => {
   })
 }
 
-const login = data =>  {
+const loginFetch = data =>  {
   return FetchHandler({
     url : 'user/login',
     method:'POST',
     data : JSON.stringify(data)
   })
 }
-const registation = data =>  {
+const registationFetch = data =>  {
   if(data.password !== data.confirmPassword){
     return new Promise((resolve, reject)=>{
       resolve({message:'password & confirm password are not  same'})
@@ -61,7 +71,23 @@ const registation = data =>  {
   })
 }
 
+const getHistoryFetch = () => {
+  return FetchHandler({
+    url: 'history',
+    method: 'GET'
+  })
+}
+const profileFetch = () => {
+  return FetchHandler({
+    url: 'user',
+    method: 'GET'
+  })
+}
+
+
 module.exports = {
-  getCarts,upPool, downPool,
-  login, registation
+  getCartsFetch,upPoolFetch, downPoolFetch,
+  loginFetch, registationFetch,
+  getHistoryFetch,
+  profileFetch
 }
