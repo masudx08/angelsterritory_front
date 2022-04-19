@@ -1,0 +1,37 @@
+.MySliderCarousel .myslider{
+  text-align: center;
+  margin: 0 10px;
+}
+
+
+ .MySliderCarousel .react-multiple-carousel__arrow--left,
+.MySliderCarousel .react-multiple-carousel__arrow--right {
+  display: none;
+}
+.MySliderCarousel{
+  position: relative;
+}
+
+.MySliderCarousel .prev__btn {
+  position: absolute;
+  top: 0;
+  left: -20px;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+.MySliderCarousel .next__btn {
+  position: absolute;
+  top: 0;
+  right: -20px;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+.MySliderCarousel .prev__btn, .MySliderCarousel .next__btn{
+  cursor: pointer
+}
+.MySliderCarousel .prev__btn svg, .MySliderCarousel .next__btn svg{
+  font-size: 30px;
+  color: gray;
+}

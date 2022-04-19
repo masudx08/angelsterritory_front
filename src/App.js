@@ -8,6 +8,8 @@ import Register from './pages/Auth/Register';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Profile from './pages/Profile/Profile';
 import History from './pages/History/History';
+
+import 'react-multi-carousel/lib/styles.css';
 function App() {
   return (
     <MainContext>
