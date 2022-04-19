@@ -1,0 +1,13 @@
+.loginCont, .registerCont{
+  margin-top: 100px;
+}
+.loginCont .formContainer,  .registerCont .formContainer{
+  width: 35%;
+  max-width: 470px;
+  min-width: 250px;
+  margin:  auto;
+  background-color: var(--white-color);
+  padding: 50px 30px;
+  border-radius: 15px;
+}
+
