@@ -3,7 +3,7 @@
   --secondary-color: #3c3c52;
   --black-color: rgb(26, 25, 25);
   --white-color: rgb(250, 250, 253);
-  --bg-color: white; 
+  --bg-color: #0f1724; 
 }
 body{
   background: var(--bg-color);
@@ -14,9 +14,12 @@ body{
   outline: none;
   box-sizing: border-box;
   text-decoration: none;
+  color: white;
 }
 
-
+p{
+  margin-bottom: 0;
+}
 button{
   background: var(--primary-color);
   color: white;
@@ -24,7 +27,23 @@ button{
   border-radius: 3px;
 }
 
+input{
+  border: 1px solid lightgray;
+  width: 100%;
+  border-radius: 4px;
+  padding: 6px  10px;
+  background: none;
+}
+
 /* short class   */
 .primary-color{color: var(--primary-color)}
+.white-color{color: var(--white-color)}
 .secondary-color{color: var(--secondary-color)}
 .cursor{cursor: pointer;}
+
+
+/* modify  */
+.form-select, .modal-body{
+  background: var(--bg-color);
+  color:  gray
+}
