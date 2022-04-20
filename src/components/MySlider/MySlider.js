@@ -4,7 +4,7 @@ import Carousel from "react-multi-carousel";
 import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 import { responsive } from "../../utils/variables";
 import { Container, Modal } from "react-bootstrap";
-import TradeCart from "./Trade/TradeCart";
+import TradeCart from "../Trade/TradeCart";
 
 export default function MySlider({ items }) {
   console.log(items);

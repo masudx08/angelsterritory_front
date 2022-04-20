@@ -1,0 +1,44 @@
+.tradecartCont {
+  margin: 0 20px;
+  margin-top: 50px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 44, 0.411),
+    0px -5px 5px rgba(0, 0, 44, 0.411);
+}
+.tradecartCont button {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.tradecartCont .headLine {
+  text-align: start;
+  background: var(--secondary-color);
+  padding: 5px 10px;
+}
+.tradecartCont .pool {
+  text-align: start;
+  background-color: #13181f;
+  padding: 3px 10px;
+}
+
+.tradecartCont .up {
+  margin-top: 10px;
+  height: 80px;
+  background-color: var(--green-color);
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding-bottom: 5px;
+  border-radius: 40% 40% 0 0;
+}
+.tradecartCont .mid {
+  padding: 10px 0;
+}
+.tradecartCont .down {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 5px;
+  height: 80px;
+  background-color: var(--red-color);
+  border-radius: 0 0 40% 40%;
+  margin-bottom: 10px;
+}
