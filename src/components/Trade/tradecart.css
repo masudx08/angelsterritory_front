@@ -21,7 +21,6 @@
 }
 
 .tradecartCont .up {
-  margin-top: 10px;
   height: 80px;
   background-color: var(--green-color);
   display: flex;
@@ -29,9 +28,14 @@
   align-items: flex-end;
   padding-bottom: 5px;
   border-radius: 40% 40% 0 0;
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
 }
 .tradecartCont .mid {
   padding: 10px 0;
+  background: #262626;
+  margin: 3px 7px;
 }
 .tradecartCont .down {
   display: flex;
@@ -40,5 +44,7 @@
   height: 80px;
   background-color: var(--red-color);
   border-radius: 0 0 40% 40%;
+  width: 90%;
+  margin: auto;
   margin-bottom: 10px;
 }
