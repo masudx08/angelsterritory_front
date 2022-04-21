@@ -53,3 +53,7 @@ input{
   background: var(--bg-color);
   color:  gray
 }
+
+.modal.show .modal-dialog{
+  margin: auto;
+}

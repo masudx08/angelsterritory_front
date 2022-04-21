@@ -8,10 +8,10 @@ export default function Login() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const handleLogin = (data) => {
-    console.log(data, "data");
     loginFetch(data).then((res) => {
+      console.log(res, 'login')
       const now = new Date();
-      now.setTime(now.getTime() + 3600 * 1000);
+      now.setTime(now.getTime() + 3600 * 10 * 1000);
       document.cookie = `token=${
         res.jwtAccessToken
       }; expires=${now.toUTCString()}`;

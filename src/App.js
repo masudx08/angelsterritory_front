@@ -1,9 +1,9 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Trade from './pages/Trade/Trade';
-import MainContext from './MainContext';
+import MainContext, { MyContext } from './MainContext';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 
@@ -11,9 +11,15 @@ import Profile from './pages/Profile/Profile';
 import History from './pages/History/History';
 
 import 'react-multi-carousel/lib/styles.css';
+import { profileFetch } from './utils/services';
+
 function App() {
+  const { setUser} = useContext(MyContext)
+
+  useEffect(()=>{
+    profileFetch().then(res=>setUser(res))
+  },[])
   return (
-    <MainContext>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -23,7 +29,6 @@ function App() {
           <Route path="/" element={<Trade />} />
         </Routes>
       </BrowserRouter>
-    </MainContext>
   );
 }
 

@@ -35,11 +35,12 @@ const getCartsFetch = () => {
   })
 }
 
-const upPoolFetch = (id, data) => {
+
+const upPoolFetch = (id, amount) => {
   return FetchHandler({
     url:'cart/'+id,
     method: 'POST',
-    data: JSON.stringify({upPool : data})
+    data: JSON.stringify({upPool : amount})
   })
 }
 

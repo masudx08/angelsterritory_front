@@ -11,7 +11,7 @@ import { responsive } from "../../utils/variables";
 import MySlider from "../../components/MySlider/MySlider";
 
 export default function Trade() {
-  const { carts, setCarts } = useContext(MyContext);
+  const { carts, setCarts, user } = useContext(MyContext);
 
   useEffect(() => {
     getCartsFetch().then((res) => {
@@ -28,6 +28,7 @@ export default function Trade() {
 
   return (
     <div>
+      <h5>USDT: {user.wallet?.USDT}</h5>
     {
       carts &&  <MySlider items={carts} />
     }

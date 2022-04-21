@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Form, Modal } from "react-bootstrap";
+import { MyContext } from "../../MainContext";
+import { downPoolFetch, upPoolFetch } from "../../utils/services";
 import "./mymodal.css";
 export default function MyModal(props) {
+  const [amount, setAmount]  = useState(1)
+  const {user} = useContext(MyContext)
+
+ 
+  function handleEnter(){
+    if(props.type == 'up'){
+      upPoolFetch(props.item.id, amount)
+      .then(res=>{
+        console.log(res, 'up')
+      })
+    }
+    if(props.type == 'down'){
+      downPoolFetch(props.item.id, amount)
+      .then(res=>{
+        console.log(res, 'down')
+      })
+    }
+  }
   return (
     <div>
       <Modal
@@ -10,6 +30,7 @@ export default function MyModal(props) {
         dialogClassName="mymodal-size"
         aria-labelledby="example-custom-modal-styling-title"
         centered
+        
       >
         <Modal.Body>
           <div className="mymodalCont">
@@ -17,30 +38,28 @@ export default function MyModal(props) {
             <p className="small-text mb-1">Entry Coin</p>
             <Form.Select aria-label="Default select example">
               <option value="USDT">USDT</option>
-              <option value="BNB">BNB</option>
             </Form.Select>
             <div>
               <p className="small-text mt-4 mb-1">USDT Amount</p>
-              <input type="text" placeholder="Enter your amount" />
+              <input value={amount} onChange={(e)=>setAmount(e.target.value)} type="number" max='100' placeholder="Enter your amount" />
               <div className='amount_btn mt-2'>
-                <p>Min</p>
-                <p>0.25%</p>
-                <p>0.5%</p>
-                <p>1%</p>
+                <p onClick={()=>setAmount(1)}>Min</p>
+                <p onClick={()=>setAmount(user.wallet.USDT * 0.25 * 0.01)}>0.25%</p>
+                <p onClick={()=>setAmount(user.wallet.USDT * 0.5 * 0.01)}>0.5%</p>
+                <p onClick={()=>setAmount(user.wallet.USDT * 1 * 0.01)}>1%</p>
               </div>
               <div className='amount_btn'>
-                <p>2.5%</p>
-                <p>5%</p>
-                <p>10%</p>
-                <p>25%</p>
+                <p onClick={()=>setAmount(user.wallet.USDT * 2.5 * 0.01)}>2.5%</p>
+                <p onClick={()=>setAmount(user.wallet.USDT * 5 * 0.01)}>5%</p>
+                <p onClick={()=>setAmount(user.wallet.USDT * 10 * 0.01)}>10%</p>
+                <p onClick={()=>setAmount(user.wallet.USDT * 25 * 0.01)}>25%</p>
               </div>
             </div>
             <div className="mt-4">
-              <p>% of your balance</p>
-              <p>Available balance: 0.919 USDT</p>
-              <p>Remaining balance: 0.919 USDT</p>
+              <p>Available balance: {user.wallet?.USDT} USDT</p>
+              <p>Remaining balance: {user.wallet?.USDT - amount}</p>
             </div>
-            <h4 className="primary-color  text-end cursor">Lock & Enter</h4>
+            <h4 className="primary-color  text-end cursor" onClick={handleEnter}>Lock & Enter</h4>
           </div>
         </Modal.Body>
       </Modal>
