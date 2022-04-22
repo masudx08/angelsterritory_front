@@ -1,6 +1,7 @@
-const { cookieParser } = require("./functions")
 
+const { cookieParser } = require("./functions")
 const backendUrl = 'http://localhost:5555/'
+
 
 const FetchHandler = (prop) => {
   if(prop.method == 'POST'){
