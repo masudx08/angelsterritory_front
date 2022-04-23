@@ -12,14 +12,18 @@ import History from './pages/History/History';
 import 'react-multi-carousel/lib/styles.css';
 import { profileFetch } from './utils/services';
 import io from 'socket.io-client'
+import { backendSocketUrl } from './utils/variables';
 
 let socket;
 function App() {
-  const { setUser, setBtcStream} = useContext(MyContext)
+  const { setUser, setBtcStream, setSocket} = useContext(MyContext)
 
   useEffect(()=>{
     profileFetch().then(res=>setUser(res))
-    socket = io("http://localhost:5000");
+    socket = io(backendSocketUrl);
+    socket.on('connect', ()=>{
+      setSocket(socket)
+    })
      socket.on('btcStream', stream=>{
       setBtcStream(stream)
      })

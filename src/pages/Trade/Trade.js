@@ -11,14 +11,28 @@ import { responsive } from "../../utils/variables";
 import MySlider from "../../components/MySlider/MySlider";
 
 export default function Trade() {
-  const { carts, setCarts, user , btcStream} = useContext(MyContext);
+  const { carts, setCarts, user , btcStream, socket} = useContext(MyContext);
 
   useEffect(() => {
     getCartsFetch().then((res) => {
       setCarts(res);
     });
-  }, []);
+    if(socket.connected){
+      socket.on('updatedCart', isCartUpdated=>{
+        console.log(isCartUpdated, 'is')
+        if(isCartUpdated){
+         getCartsFetch().then((res) => {
+           setCarts(res);
+         });
+        }
+      })
+    }
+      
+  }, [socket]);
+  
 
+ 
+ 
   const upPoolHandler = (id, data) => {
     upPoolFetch(id, data);
   };
@@ -28,7 +42,7 @@ export default function Trade() {
 
   return (
     <div>
-      <h5>BTC/USDT : {btcStream.close}</h5>
+      <h5>BTC/USDT : {btcStream}</h5>
       <h5>USDT: {user.wallet?.USDT}</h5>
     {
       carts &&  <MySlider items={carts} />

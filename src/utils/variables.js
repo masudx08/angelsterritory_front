@@ -19,4 +19,4 @@
     }
   };
 
-  
+  export const backendSocketUrl = "http://localhost:5000"
