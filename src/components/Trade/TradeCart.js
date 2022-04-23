@@ -56,8 +56,12 @@ export default function TradeCart({ item }) {
             }
             
 
-            <p>Closed Price: {item.closedPrice?.toFixed(2)}</p>
-            {/* <p>current price : {btcStream}</p> */}
+            {
+              item.closedPrice && <p>Closed Price: {item.closedPrice?.toFixed(2)}</p>
+            }
+            {
+              !item.closedPrice  && <p>Current price : {btcStream && Number(btcStream).toFixed(2)}</p>
+            }
           </div>
           <div className="down">
             <p>{item.downPool?.toFixed(2)}$</p>

@@ -24,6 +24,10 @@ function App() {
     socket.on('connect', ()=>{
       setSocket(socket)
     })
+    socket.on('updatedCart', ()=>{
+      profileFetch().then(res=>setUser(res))
+    })
+    
      socket.on('btcStream', stream=>{
       setBtcStream(stream)
      })
