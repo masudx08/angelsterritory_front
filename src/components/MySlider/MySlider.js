@@ -7,7 +7,6 @@ import { Container, Modal } from "react-bootstrap";
 import TradeCart from "../Trade/TradeCart";
 
 export default function MySlider({ items }) {
-  console.log(items);
   const MyCarousel = useRef();
 
   function handleNext() {

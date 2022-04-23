@@ -9,20 +9,20 @@ import Register from './pages/Auth/Register';
 
 import Profile from './pages/Profile/Profile';
 import History from './pages/History/History';
-
 import 'react-multi-carousel/lib/styles.css';
 import { profileFetch } from './utils/services';
 import io from 'socket.io-client'
+
 let socket;
 function App() {
-  const { setUser} = useContext(MyContext)
+  const { setUser, setBtcStream} = useContext(MyContext)
 
   useEffect(()=>{
     profileFetch().then(res=>setUser(res))
     socket = io("http://localhost:5000");
-    socket.on('wow', (res)=>{
-      console.log(res, 'result')
-    })
+     socket.on('btcStream', stream=>{
+      setBtcStream(stream)
+     })
         
   },[])
   return (

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import MyModal from "./MyModal";
 import "./tradecart.css";
-
 export default function TradeCart({ item }) {
   const [modalShow, setModalShow] = useState(false);
   const [poolType, setPoolType] = useState('');
+ 
   return (
     <>
       <MyModal type={poolType} item={item} show={modalShow} onHide={() => setModalShow(false)} />
