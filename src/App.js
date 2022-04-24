@@ -16,7 +16,7 @@ import { backendSocketUrl } from './utils/variables';
 
 let socket;
 function App() {
-  const { setUser, setBtcStream, setSocket} = useContext(MyContext)
+  const { setUser, setBtcStream, setEthStream, setBnbStream, setSocket, selectedCoin} = useContext(MyContext)
 
   useEffect(()=>{
     profileFetch().then(res=>setUser(res))
@@ -30,6 +30,12 @@ function App() {
     
      socket.on('btcStream', stream=>{
       setBtcStream(stream)
+     })
+     socket.on('ethStream', stream=>{
+      setEthStream(stream)
+     })
+     socket.on('bnbStream', stream=>{
+      setBnbStream(stream)
      })
         
   },[])

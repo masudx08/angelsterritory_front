@@ -45,6 +45,7 @@ input{
 .red-color{color: var(--red-color)}
 .green-bg{background: var(--green-color)}
 .red-bg{background: var(--red-color)}
+.gray-bg{background: var(--secondary-color);}
 .cursor{cursor: pointer;}
 
 

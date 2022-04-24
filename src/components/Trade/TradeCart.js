@@ -29,63 +29,64 @@ export default function TradeCart({ item }) {
             <p>Locked Price: {item.lockedPrice?.toFixed(2)}</p>
             {!item.closedPrice && btcStream > item.lockedPrice && (
               <p className="green-color" style={{ fontWeight: "bold" }}>
-                Up by: ${(btcStream - item.lockedPrice).toFixed(2)}{" "}
+                Up by: ${(btcStream - item.lockedPrice).toFixed(4)}{" "}
               </p>
             )}
             {!item.closedPrice && btcStream < item.lockedPrice && (
               <p className="red-color" style={{ fontWeight: "bold" }}>
-                Down by: ${(item.lockedPrice - btcStream).toFixed(2)}{" "}
+                Down by: ${(item.lockedPrice - btcStream).toFixed(4)}{" "}
               </p>
             )}
 
-            {
-              item.closedPrice && item.lockedPrice < item.closedPrice && 
-              (
-                <p className="green-color" style={{ fontWeight: "bold" }}>
-                  Up by: ${(item.closedPrice - item.lockedPrice).toFixed(2)}{" "}
-                </p>
-              )
-            }
-            {
-              item.closedPrice && item.lockedPrice > item.closedPrice && 
-              (
-                <p className="red-color" style={{ fontWeight: "bold" }}>
-                  Down by: ${(item.lockedPrice - item.closedPrice).toFixed(2)}{" "}
-                </p>
-              )
-            }
-            
+            {item.closedPrice && item.lockedPrice < item.closedPrice && (
+              <p className="green-color" style={{ fontWeight: "bold" }}>
+                Up by: ${(item.closedPrice - item.lockedPrice).toFixed(4)}{" "}
+              </p>
+            )}
+            {item.closedPrice && item.lockedPrice > item.closedPrice && (
+              <p className="red-color" style={{ fontWeight: "bold" }}>
+                Down by: ${(item.lockedPrice - item.closedPrice).toFixed(4)}{" "}
+              </p>
+            )}
 
-            {
-              item.closedPrice && <p>Closed Price: {item.closedPrice?.toFixed(2)}</p>
-            }
-            {
-              !item.closedPrice  && <p>Current price : {btcStream && Number(btcStream).toFixed(2)}</p>
-            }
+            {item.closedPrice && (
+              <p>Closed Price: {item.closedPrice?.toFixed(2)}</p>
+            )}
+            {!item.closedPrice && (
+              <p>Current price : {btcStream && Number(btcStream).toFixed(2)}</p>
+            )}
           </div>
           <div className="down">
             <p>{item.downPool?.toFixed(2)}$</p>
             <p>{item.downPayout?.toFixed(2)}x Payout</p>
           </div>
-
-          <button
-            className="green-bg"
-            onClick={() => {
-              setModalShow(true);
-              setPoolType("up");
-            }}
-          >
-            Enter Up
-          </button>
-          <button
-            className="red-bg"
-            onClick={() => {
-              setModalShow(true);
-              setPoolType("down");
-            }}
-          >
-            Enter Down
-          </button>
+          {!item.closedPrice ? (
+            <>
+              <button
+                className="green-bg"
+                onClick={() => {
+                  setModalShow(true);
+                  setPoolType("up");
+                }}
+              >
+                Enter Up
+              </button>
+              <button
+                className="red-bg"
+                onClick={() => {
+                  setModalShow(true);
+                  setPoolType("down");
+                }}
+              >
+                Enter Down
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="gray-bg" style={{cursor:'context-menu'}}>...</button>
+              <button className="gray-bg" style={{cursor:'context-menu'}}>...</button>
+            </>
+          )}
         </div>
       </div>
     </>
