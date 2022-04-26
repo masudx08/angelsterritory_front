@@ -12,23 +12,33 @@ import MySlider from "../../components/MySlider/MySlider";
 import { Form } from "react-bootstrap";
 
 export default function Trade() {
-  const { carts, setCarts, user, btcStream, ethStream, bnbStream, socket, setSelectedCoin, selectedCoin,  } = useContext(MyContext);
+  const { carts, setCarts, user, btcStream, ethStream, bnbStream, socket, setSelectedCoin, selectedCoin, selectedTime, setSelectedTime } = useContext(MyContext);
+  const OneMinute = 1000*10
+  const FiveMinute = 1000*20
+  const FifteenMinute = 1000*30
 
+
+  // const OneMinute = 1000*60
+  // const FiveMinute = 1000*60*5
+  // const FifteenMinute = 1000*60*15
+  // const HalfHour = 1000*60*30
+  // const OneHour = 1000*60*60
+  // const OneDay = 1000*60*60*24
   useEffect(() => {
-    getCartsFetch().then((res) => {
+    getCartsFetch(selectedCoin, selectedTime).then((res) => {
       setCarts(res);
     });
     if (socket.connected) {
       socket.on("updatedCart", (isCartUpdated) => {
-        console.log(isCartUpdated, "is");
+        console.log(isCartUpdated, "is cartupdated");
         if (isCartUpdated) {
-          getCartsFetch().then((res) => {
+          getCartsFetch(selectedCoin, selectedTime).then((res) => {
             setCarts(res);
           });
         }
       });
     }
-  }, [socket]);
+  }, [selectedCoin, selectedTime]);
 
   const upPoolHandler = (id, data) => {
     upPoolFetch(id, data);
@@ -54,6 +64,11 @@ export default function Trade() {
         <option value="BTC">BTC</option>
         <option value="ETH">ETH</option>
         <option value="BNB">BNB</option>
+      </Form.Select>
+      <Form.Select aria-label="Default select example" onChange={e=>setSelectedTime(Number(e.target.value))}>
+        <option value={OneMinute}>1 Min</option>
+        <option value={FiveMinute}>5 Min</option>
+        <option value={FifteenMinute}>15 Min</option>
       </Form.Select>
       {carts && <MySlider items={carts} />}
     </div>

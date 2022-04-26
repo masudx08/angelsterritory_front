@@ -10,6 +10,7 @@ export default function MainContext({children}) {
   const [user, setUser] = useState({})
   const [wallet, setWallet] = useState({})
   const [selectedCoin, setSelectedCoin] = useState('BTC')
+  const [selectedTime, setSelectedTime] = useState(60*1000)
 
   const defaultValue = {
     socket, setSocket,
@@ -19,8 +20,10 @@ export default function MainContext({children}) {
     carts, setCarts,
     user, setUser,
     wallet, setWallet,
-    selectedCoin, setSelectedCoin
+    selectedCoin, setSelectedCoin,
+    selectedTime, setSelectedTime
   }
+  console.log(typeof selectedTime, selectedTime)
   return (
    <MyContext.Provider value={defaultValue}>
      {children}
