@@ -55,10 +55,12 @@ export default function MyModal(props) {
                 <p onClick={()=>setAmount(user.wallet.USDT * 25 * 0.01)}>25%</p>
               </div>
             </div>
+
             <div className="mt-4">
               <p>Available balance: {user.wallet?.USDT} USDT</p>
               <p>Remaining balance: {user.wallet?.USDT - amount}</p>
             </div>
+           
             <h4 className="primary-color  text-end cursor" onClick={handleEnter}>Lock & Enter</h4>
           </div>
         </Modal.Body>
