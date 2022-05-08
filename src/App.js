@@ -24,7 +24,7 @@ function App() {
     socket.on('connect', ()=>{
       setSocket(socket)
     })
-    socket.on('updatedCart', ()=>{
+    socket.on('update', ()=>{
       console.log('updated cart')
       profileFetch().then(res=>setUser(res))
       getCartsFetch(selectedCoin, selectedTime).then((res) => {

@@ -58,3 +58,7 @@ input{
 .modal.show .modal-dialog{
   margin: auto;
 }
+
+.table-striped>tbody>tr:nth-of-type(odd)>*{
+  color: white;
+}
