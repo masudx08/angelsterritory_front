@@ -10,13 +10,13 @@ import Register from './pages/Auth/Register';
 import Profile from './pages/Profile/Profile';
 import History from './pages/History/History';
 import 'react-multi-carousel/lib/styles.css';
-import { profileFetch } from './utils/services';
+import { profileFetch, getCartsFetch } from './utils/services';
 import io from 'socket.io-client'
 import { backendSocketUrl } from './utils/variables';
 
 let socket;
 function App() {
-  const { setUser, setBtcStream, setEthStream, setBnbStream, setSocket, selectedCoin} = useContext(MyContext)
+  const { setUser, setBtcStream, setEthStream, setBnbStream, setSocket, selectedCoin, selectedTime, setCarts} = useContext(MyContext)
 
   useEffect(()=>{
     profileFetch().then(res=>setUser(res))
@@ -25,7 +25,11 @@ function App() {
       setSocket(socket)
     })
     socket.on('updatedCart', ()=>{
+      console.log('updated cart')
       profileFetch().then(res=>setUser(res))
+      getCartsFetch(selectedCoin, selectedTime).then((res) => {
+        setCarts(res);
+      });
     })
     
      socket.on('btcStream', stream=>{

@@ -23,7 +23,6 @@ export default function MainContext({children}) {
     selectedCoin, setSelectedCoin,
     selectedTime, setSelectedTime
   }
-  console.log(typeof selectedTime, selectedTime)
   return (
    <MyContext.Provider value={defaultValue}>
      {children}

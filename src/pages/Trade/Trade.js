@@ -24,22 +24,14 @@ export default function Trade() {
   const HalfHour = 1000*60*30
   const OneHour = 1000*60*60
   const OneDay = 1000*60*60*24
+  
   useEffect(() => {
     getCartsFetch(selectedCoin, selectedTime).then((res) => {
       setCarts(res);
     });
-    if (socket.connected) {
-      socket.on("updatedCart", (isCartUpdated) => {
-        console.log(isCartUpdated, "is cartupdated");
-        if (isCartUpdated) {
-          getCartsFetch(selectedCoin, selectedTime).then((res) => {
-            setCarts(res);
-          });
-        }
-      });
-    }
   }, [selectedCoin, selectedTime]);
 
+  
   const upPoolHandler = (id, data) => {
     upPoolFetch(id, data);
   };

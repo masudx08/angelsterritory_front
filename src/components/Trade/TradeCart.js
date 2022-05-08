@@ -4,7 +4,8 @@ import { MyContext } from "../../MainContext";
 import MyModal from "./MyModal";
 import "./tradecart.css";
 export default function TradeCart({ item }) {
-  const { btcStream } = useContext(MyContext);
+  const { btcStream, ethStream, bnbStream, selectedCoin } =
+    useContext(MyContext);
   const [modalShow, setModalShow] = useState(false);
   const [poolType, setPoolType] = useState("");
 
@@ -27,16 +28,52 @@ export default function TradeCart({ item }) {
           </div>
           <div className="mid">
             <p>Locked Price: {item.lockedPrice?.toFixed(2)}</p>
-            {!item.closedPrice && btcStream > item.lockedPrice && (
-              <p className="green-color" style={{ fontWeight: "bold" }}>
-                Up by: ${(btcStream - item.lockedPrice).toFixed(4)}{" "}
-              </p>
-            )}
-            {!item.closedPrice && btcStream < item.lockedPrice && (
-              <p className="red-color" style={{ fontWeight: "bold" }}>
-                Down by: ${(item.lockedPrice - btcStream).toFixed(4)}{" "}
-              </p>
-            )}
+
+            {
+              selectedCoin == 'BTC' && !item.closedPrice && btcStream > item.lockedPrice && (
+                <p className="green-color" style={{ fontWeight: "bold" }}>
+                  Up by: ${(btcStream - item.lockedPrice).toFixed(4)}{" "}
+                </p>
+              )
+            }
+            {
+              selectedCoin == 'BTC' && !item.closedPrice && btcStream < item.lockedPrice && (
+                <p className="red-color" style={{ fontWeight: "bold" }}>
+                  Down by: ${(item.lockedPrice - btcStream).toFixed(4)}{" "}
+                </p>
+              )
+            }
+            {
+              selectedCoin == 'ETH' && !item.closedPrice && ethStream > item.lockedPrice && (
+                <p className="green-color" style={{ fontWeight: "bold" }}>
+                  Up by: ${(ethStream - item.lockedPrice).toFixed(4)}{" "}
+                </p>
+              )
+            }
+            {
+              selectedCoin == 'ETH' && !item.closedPrice && ethStream < item.lockedPrice && (
+                <p className="red-color" style={{ fontWeight: "bold" }}>
+                  Down by: ${(item.lockedPrice - ethStream).toFixed(4)}{" "}
+                </p>
+              )
+            }
+            {
+              selectedCoin == 'BNB' && !item.closedPrice && bnbStream > item.lockedPrice && (
+                <p className="green-color" style={{ fontWeight: "bold" }}>
+                  Up by: ${(bnbStream - item.lockedPrice).toFixed(4)}{" "}
+                </p>
+              )
+            }
+            {
+              selectedCoin == 'BNB' && !item.closedPrice && bnbStream < item.lockedPrice && (
+                <p className="red-color" style={{ fontWeight: "bold" }}>
+                  Down by: ${(item.lockedPrice - bnbStream).toFixed(4)}{" "}
+                </p>
+              )
+            }
+            
+
+
 
             {item.closedPrice && item.lockedPrice < item.closedPrice && (
               <p className="green-color" style={{ fontWeight: "bold" }}>
@@ -53,7 +90,21 @@ export default function TradeCart({ item }) {
               <p>Closed Price: {item.closedPrice?.toFixed(2)}</p>
             )}
             {!item.closedPrice && (
-              <p>Current price : {btcStream && Number(btcStream).toFixed(2)}</p>
+              <p>
+                Current price:  {' '}
+                {
+                  selectedCoin == 'BTC' &&
+                  Number(btcStream).toFixed(2)
+                }
+                {
+                  selectedCoin == 'ETH' &&
+                  Number(ethStream).toFixed(2)
+                }
+                {
+                  selectedCoin == 'BNB' &&
+                  Number(bnbStream).toFixed(2)
+                }
+              </p>
             )}
           </div>
           <div className="down">
@@ -83,8 +134,12 @@ export default function TradeCart({ item }) {
             </>
           ) : (
             <>
-              <button className="gray-bg" style={{cursor:'context-menu'}}>...</button>
-              <button className="gray-bg" style={{cursor:'context-menu'}}>...</button>
+              <button className="gray-bg" style={{ cursor: "context-menu" }}>
+                ...
+              </button>
+              <button className="gray-bg" style={{ cursor: "context-menu" }}>
+                ...
+              </button>
             </>
           )}
         </div>
