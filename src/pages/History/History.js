@@ -18,6 +18,7 @@ export default function History() {
             <th>#</th>
             <th>Status</th>
             <th>Contract</th>
+            <th>Probablity</th>
             <th>Amount</th>
             <th>Trade Currency</th>
           </tr>
@@ -29,6 +30,7 @@ export default function History() {
                 <td>{index+1}</td>
                 <td>{item.status}</td>
                 <td>{item.contractType}</td>
+                <td>{item.bet}</td>
                 <td>{item.amount} USDT</td>
                 <td>{item.currency}</td>
               </tr>
