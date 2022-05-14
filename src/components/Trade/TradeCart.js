@@ -9,7 +9,7 @@ export default function TradeCart({ item }) {
     useContext(MyContext);
   const [modalShow, setModalShow] = useState(false);
   const [poolType, setPoolType] = useState("");
-
+  const cartTime = ((new Date(item.startTime).getTime() - new Date().getTime())/1000).toFixed(0)
   return (
     <>
       <MyModal
@@ -21,14 +21,23 @@ export default function TradeCart({ item }) {
       <div className="tradecartCont">
         <div className="myslider">
           <p className="headLine">{item.currency}/USDT</p>
-          {/* <p>{((new Date().getTime() - new Date(item.startTime).getTime())/1000).toFixed(0)}</p> */}
+          <p>
+           
+            {
+              cartTime > 0 && cartTime <= 60 && `Live ${cartTime}`
+            }
+            {
+              cartTime < 0  && 'Over'
+            }
+            {
+              cartTime > 60 && `Upcomming ${cartTime - 60}`
+            }
+            
+          </p>
           <p>
             {/* {
-              moment(( new Date(item.startTime).getTime()) - (new Date().getTime())).format('ss')
+              moment((new Date().getTime()) - (new Date(item.startTime).getTime()) ).format('mm:ss')
             } */}
-            {
-              moment(((new Date().getTime() - new Date(item.startTime).getTime()))).format('mm:ss')
-            }
           </p>
           <p className="pool">Pool: {item.totalPool}</p>
 
@@ -39,51 +48,48 @@ export default function TradeCart({ item }) {
           <div className="mid">
             <p>Locked Price: {item.lockedPrice?.toFixed(2)}</p>
 
-            {
-              selectedCoin == 'BTC' && !item.closedPrice && btcStream > item.lockedPrice && (
+            {selectedCoin == "BTC" &&
+              !item.closedPrice &&
+              btcStream > item.lockedPrice && (
                 <p className="green-color" style={{ fontWeight: "bold" }}>
                   Up by: ${(btcStream - item.lockedPrice).toFixed(4)}{" "}
                 </p>
-              )
-            }
-            {
-              selectedCoin == 'BTC' && !item.closedPrice && btcStream < item.lockedPrice && (
+              )}
+            {selectedCoin == "BTC" &&
+              !item.closedPrice &&
+              btcStream < item.lockedPrice && (
                 <p className="red-color" style={{ fontWeight: "bold" }}>
                   Down by: ${(item.lockedPrice - btcStream).toFixed(4)}{" "}
                 </p>
-              )
-            }
-            {
-              selectedCoin == 'ETH' && !item.closedPrice && ethStream > item.lockedPrice && (
+              )}
+            {selectedCoin == "ETH" &&
+              !item.closedPrice &&
+              ethStream > item.lockedPrice && (
                 <p className="green-color" style={{ fontWeight: "bold" }}>
                   Up by: ${(ethStream - item.lockedPrice).toFixed(4)}{" "}
                 </p>
-              )
-            }
-            {
-              selectedCoin == 'ETH' && !item.closedPrice && ethStream < item.lockedPrice && (
+              )}
+            {selectedCoin == "ETH" &&
+              !item.closedPrice &&
+              ethStream < item.lockedPrice && (
                 <p className="red-color" style={{ fontWeight: "bold" }}>
                   Down by: ${(item.lockedPrice - ethStream).toFixed(4)}{" "}
                 </p>
-              )
-            }
-            {
-              selectedCoin == 'BNB' && !item.closedPrice && bnbStream > item.lockedPrice && (
+              )}
+            {selectedCoin == "BNB" &&
+              !item.closedPrice &&
+              bnbStream > item.lockedPrice && (
                 <p className="green-color" style={{ fontWeight: "bold" }}>
                   Up by: ${(bnbStream - item.lockedPrice).toFixed(4)}{" "}
                 </p>
-              )
-            }
-            {
-              selectedCoin == 'BNB' && !item.closedPrice && bnbStream < item.lockedPrice && (
+              )}
+            {selectedCoin == "BNB" &&
+              !item.closedPrice &&
+              bnbStream < item.lockedPrice && (
                 <p className="red-color" style={{ fontWeight: "bold" }}>
                   Down by: ${(item.lockedPrice - bnbStream).toFixed(4)}{" "}
                 </p>
-              )
-            }
-            
-
-
+              )}
 
             {item.closedPrice && item.lockedPrice < item.closedPrice && (
               <p className="green-color" style={{ fontWeight: "bold" }}>
@@ -101,19 +107,10 @@ export default function TradeCart({ item }) {
             )}
             {!item.closedPrice && (
               <p>
-                Current price:  {' '}
-                {
-                  selectedCoin == 'BTC' &&
-                  Number(btcStream).toFixed(2)
-                }
-                {
-                  selectedCoin == 'ETH' &&
-                  Number(ethStream).toFixed(2)
-                }
-                {
-                  selectedCoin == 'BNB' &&
-                  Number(bnbStream).toFixed(2)
-                }
+                Current price:{" "}
+                {selectedCoin == "BTC" && Number(btcStream).toFixed(2)}
+                {selectedCoin == "ETH" && Number(ethStream).toFixed(2)}
+                {selectedCoin == "BNB" && Number(bnbStream).toFixed(2)}
               </p>
             )}
           </div>
@@ -121,7 +118,7 @@ export default function TradeCart({ item }) {
             <p>{item.downPool?.toFixed(2)}$</p>
             <p>{item.downPayout?.toFixed(2)}x Payout</p>
           </div>
-          {!item.closedPrice ? (
+          {cartTime > 60  ? (
             <>
               <button
                 className="green-bg"
