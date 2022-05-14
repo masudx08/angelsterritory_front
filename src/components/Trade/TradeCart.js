@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { MyContext } from "../../MainContext";
@@ -20,6 +21,15 @@ export default function TradeCart({ item }) {
       <div className="tradecartCont">
         <div className="myslider">
           <p className="headLine">{item.currency}/USDT</p>
+          {/* <p>{((new Date().getTime() - new Date(item.startTime).getTime())/1000).toFixed(0)}</p> */}
+          <p>
+            {/* {
+              moment(( new Date(item.startTime).getTime()) - (new Date().getTime())).format('ss')
+            } */}
+            {
+              moment(((new Date().getTime() - new Date(item.startTime).getTime()))).format('mm:ss')
+            }
+          </p>
           <p className="pool">Pool: {item.totalPool}</p>
 
           <div className="up">
