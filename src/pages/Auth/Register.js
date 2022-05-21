@@ -2,6 +2,7 @@ import React from 'react'
 import { Form } from 'react-bootstrap'
 import {useForm} from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
+import MyNav from '../../components/MyNav/MyNav'
 import { registationFetch } from '../../utils/services'
 import './auth.css'
 export default function Register() {
@@ -12,6 +13,7 @@ export default function Register() {
   }
   return (
     <div className='registerCont'>
+      <MyNav />
       <div className="formContainer">
         <div className="d-flex gap-3 mb-3">
           <h3  className="secondary-color cursor" onClick={() => navigate("/login")}>

@@ -13,6 +13,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { profileFetch, getCartsFetch } from './utils/services';
 import io from 'socket.io-client'
 import { backendSocketUrl } from './utils/variables';
+import Home from './components/Home/Home';
 
 let socket;
 function App() {
@@ -50,7 +51,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/history" element={<History />} />
-          <Route path="/" element={<Trade />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
   );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
+import MyNav from "../../components/MyNav/MyNav";
 import { cookieParser } from "../../utils/functions";
 import { getHistoryFetch } from "../../utils/services";
 
@@ -12,6 +13,7 @@ export default function History() {
   }, []);
   return (
     <div>
+      <MyNav />
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>

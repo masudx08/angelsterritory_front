@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import MyNav from "../../components/MyNav/MyNav";
 import { loginFetch } from "../../utils/services";
 import "./auth.css";
 export default function Login() {
@@ -9,7 +10,7 @@ export default function Login() {
   const navigate = useNavigate();
   const handleLogin = (data) => {
     loginFetch(data).then((res) => {
-      console.log(res, 'login')
+      navigate('/')
       const now = new Date();
       now.setTime(now.getTime() + 3600 * 10 * 1000);
       document.cookie = `token=${
@@ -19,6 +20,7 @@ export default function Login() {
   };
   return (
     <div className="loginCont">
+      <MyNav />
       <div className="formContainer">
         <div className="d-flex gap-3 mb-3">
           <h3 className="primary-color cursor" onClick={() => navigate("/login")}>
